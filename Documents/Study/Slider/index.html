@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div>
+        <h1>Completed projects</h1>
+        <p>
+          Only a small part of the work performed by our company is presented on
+          the site. For 14 years on in the construction market we have made
+          happy more than 1000 families
+        </p>
+      </div>
+      <div class="specifications">
+        <div>
+          <h3>CITY:</h3>
+          <p class="rostov-admiral">Rostov-on-Don</p>
+          <p class="rostov-admiral">LCD admiral</p>
+          <p class="sochi" style="display: none">Sochi</p>
+          <p class="sochi" style="display: none">Thieves</p>
+          <p class="rostov-patriotic" style="display: none">Rostov-on-Don</p>
+          <p class="rostov-patriotic" style="display: none">Patriotic</p>
+        </div>
+        <div>
+          <h3>APARTMENT AREA:</h3>
+          <p class="rostov-admiral">81 m<sup>2</sup></p>
+          <p class="sochi" style="display: none">105 m<sup>2</sup></p>
+          <p class="rostov-patriotic" style="display: none">93 m<sup>2</sup></p>
+        </div>
+        <div>
+          <h3>REPAIR TIME:</h3>
+          <p class="rostov-admiral">3.5 months</p>
+          <p class="sochi" style="display: none">3 months</p>
+          <p class="rostov-patriotic" style="display: none">4 months</p>
+        </div>
+        <div>
+          <h3>REPAIR COST:</h3>
+          <p>Upon request</p>
+        </div>
+      </div>
+      <div class="arrows">
+        <button><img id="arrow-left" src="images/arrow-left.svg" alt="Стрелка влево" />
+        <button><div id="dot-1" class="dot active"></div></button>
+        <button><div id="dot-2" class="dot"></div></button>
+       <button> <div id="dot-3" class="dot"></div></button>
+        <button><img
+          id="arrow-right"
+          src="images/arrow-right.svg"
+          alt="Стрелка вправо"
+        /></button>
+      </div>
+    </div>
+
+    <div class="links">
+      <ul>
+        <li><button class="link active" id="link-1">ROSTOV-ON-DON ADMIRAL</button></li>
+        <li><button class="link" id="link-2">SOCHI THIEVES</button></li>
+        <li><button class="link" id="link-3">ROSTOV-ON-DON PATRIOTIC</button></li>
+      </ul>
+    </div>
+
+    <div class="images">
+        <img id="image" src="images/Rostov-on-don admiral.jpg" alt="">
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Yeseva+One&display=swap");
+
+html {
+    max-width: 1440px;
+  margin: 0 auto;
+  box-sizing: content-box;
+}
+
+h1,
+h3 {
+  font-family: "Yeseva One";
+  color: #e3b873;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 27px;
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 9px 0;
+  padding: 0;
+}
+
+.specifications p {
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+      font-family: "Nunito Sans";
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  width: 70vw;
+  display: grid;
+  grid-template-columns: 442px 679px;
+  grid-template-rows: 24px 483px;
+  gap: 50px;
+  margin: 97px 5vw;
+}
+
+.main {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.links {
+  grid-column: 2;
+  grid-row: 1;
+}
+.links ul {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+  gap: 60px;
+}
+
+.link.active {
+  color: #e3b873;
+  border-bottom: 3px #e3b873 solid;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.3);
+  border: none;
+  background: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding-bottom: 6px;
+}
+
+.images {
+  grid-column: 2;
+  grid-row: 2;
+  height: 483px;
+  width: 679px;
+  background-size: cover;
+}
+
+.specifications {
+  display: grid;
+  grid-template-columns: 156px 213px;
+  grid-template-rows: 73px 73px;
+}
+
+.arrows {
+  width: 100%;
+  height: 11px;
+}
+
+.arrows button {
+  background: none;
+  border: none;
+}
+
+.arrows .dot,
+.arrows .dot.active {
+  width: 11px;
+  height: 11px;
+  margin: 0 9px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: white;
+}
+
+.arrows img {
+  margin: 0 11px;
+  cursor: pointer;
+}
+
+.arrows .dot:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.arrows .dot.active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
