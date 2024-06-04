@@ -12,21 +12,22 @@ const sochi = document.querySelectorAll(".sochi");
 const rostov_patriotic = document.querySelectorAll(".rostov-patriotic");
 
 const aparts = [
-  { src: "images/Rostov-on-don admiral.jpg" },
-  { src: "images/Sochi.jpg" },
-  { src: "images/Rostov-on-don patriotic.jpg" },
+  { src: "images/Rostov-on-don admiral.jpg", alt: "Фото квартиры в Ростове-на-Дону, Адмирал"},
+  { src: "images/Sochi.jpg", alt: "Фото квартиры в Сочи, Thieves"},
+  { src: "images/Rostov-on-don patriotic.jpg", alt: "Фото квартиры в Ростове-на-Дону, Патриотик", },
 ];
 
 const setImg = (index) => {
   image.src = aparts[index].src;
+  image.alt = aparts[index].alt;
 };
 
 let currentIndex = "0";
 
 arrow_left.addEventListener("click", () => {
   currentIndex--;
-  if (currentIndex == "-1") currentIndex = aparts.length-1;
-console.log(aparts.length);
+  if (currentIndex == "-1") currentIndex = aparts.length - 1;
+  console.log(aparts.length);
   setImg(currentIndex);
   class_active(currentIndex);
 });
