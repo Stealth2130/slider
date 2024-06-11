@@ -120,3 +120,9 @@ const class_active = (num_img) => {
     }
   }
 };
+
+console.log(window.screen.width);
+console.log(document.documentElement.clientWidth);
+console.log(window.screen.height);
+console.log(
+document.documentElement.clientHeight);
