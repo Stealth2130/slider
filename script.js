@@ -173,7 +173,7 @@ function initSlider(images, options) {
 document.addEventListener("DOMContentLoaded", () => {
   let sliderOptions = {
     dots: true,
-    autoplay: true,
+    autoplay: false,
     autoplayInterval: 5000,
     arrows: true,
   };
