@@ -1,135 +1,180 @@
-const arrow_left = document.getElementById("arrow-left");
-const arrow_right = document.getElementById("arrow-right");
+// import { moveSlider } from "./js/moveSlider";
 
-const image = document.getElementById("image");
-const rostov_admiral = document.querySelectorAll(".rostov-admiral");
-const sochi = document.querySelectorAll(".sochi");
-const rostov_patriotic = document.querySelectorAll(".rostov-patriotic");
-
-const aparts = [
-  { src: "images/Rostov-on-don admiral.jpg", alt: "Фото квартиры в Ростове-на-Дону, Адмирал"},
-  { src: "images/Sochi.jpg", alt: "Фото квартиры в Сочи, Thieves"},
-  { src: "images/Rostov-on-don patriotic.jpg", alt: "Фото квартиры в Ростове-на-Дону, Патриотик", },
+const images = [
+  {
+    url: "./images/Rostov-on-don_admiral.jpg",
+    name: "ROSTOV-ON-DON ADMIRAL",
+    city: ["Rostov-on-Don", " LCD admiral"],
+    area: "81 m<sup>2</sup>",
+    time: "3.5 months",
+  },
+  {
+    url: "./images/Sochi.jpg",
+    name: "SOCHI THIEVES",
+    city: ["Sochi", " Thieves"],
+    area: "105 m<sup>2",
+    time: "3 months",
+  },
+  {
+    url: "./images/Rostov-on-don_patriotic.jpg",
+    name: "ROSTOV-ON-DON PATRIOTIC",
+    city: ["Rostov-on-Don", " Patriotic"],
+    area: "93 m<sup>2</sup>",
+    time: "4 months",
+  },
 ];
 
-const setImg = (index) => {
-  image.src = aparts[index].src;
-  image.alt = aparts[index].alt;
-};
+function initSlider(images, options) {
+  if (!images || !images.length) return;
 
-let currentIndex = "0";
+  options = options || {
+    dots: true,
+    autoplay: true,
+    autoplayInterval: 5000,
+    arrows: true,
+  };
 
-arrow_left.addEventListener("click", () => {
-  currentIndex--;
-  if (currentIndex == "-1") currentIndex = aparts.length - 1;
-  console.log(aparts.length);
-  setImg(currentIndex);
-  class_active(currentIndex);
-});
+  const sliderWrapper = document.querySelector(".main__images_slider");
+  const sliderImages = sliderWrapper.querySelector(".slider__image");
+  const sliderNavigation = document.querySelector(".slider__navigation");
+  const oneSliderArrow = sliderNavigation.querySelectorAll(".slider__arrow");
+  const textWrapper = document.querySelector(".main__text");
+  const dotsWrapper = textWrapper.querySelector(".slider__points")
+  const linkWrapper = document.querySelector(".main__images_links");
+  const cityWrapper = document.querySelector(".city");
+  const areaWrapper = document.querySelector(".area");
+  const timeWrapper = document.querySelector(".time");
 
-arrow_right.addEventListener("click", () => {
-  currentIndex++;
-  if (currentIndex == aparts.length) currentIndex = "0";
-  setImg(currentIndex);
-  class_active(currentIndex);
-});
+  initImages();
+  initLinks();
 
-link_1.addEventListener("click", () => {
-  setImg("0");
-  class_active("0");
-});
-
-link_2.addEventListener("click", () => {
-  setImg("1");
-  class_active("1");
-});
-
-link_3.addEventListener("click", () => {
-  setImg("2");
-  class_active("2");
-});
-
-dot_1.onclick = () => {
-  setImg("0");
-  class_active("0");
-};
-
-dot_2.onclick = () => {
-  setImg("1");
-  class_active("1");
-};
-
-dot_3.onclick = () => {
-  setImg("2");
-  class_active("2");
-};
-
-const class_active = (num_img) => {
-  if (num_img == "0") {
-    link_1.classList.add("active");
-    link_2.classList.remove("active");
-    link_3.classList.remove("active");
-    dot_1.classList.add("active");
-    dot_2.classList.remove("active");
-    dot_3.classList.remove("active");
-    for (let index = 0; index < rostov_admiral.length; index++) {
-      rostov_admiral[index].style.display = "block";
-    }
-    for (let index = 0; index < sochi.length; index++) {
-      sochi[index].style.display = "none";
-    }
-    for (let index = 0; index < rostov_patriotic.length; index++) {
-      rostov_patriotic[index].style.display = "none";
-    }
-  } else if (num_img == "1") {
-    link_1.classList.remove("active");
-    link_2.classList.add("active");
-    link_3.classList.remove("active");
-    dot_1.classList.remove("active");
-    dot_2.classList.add("active");
-    dot_3.classList.remove("active");
-    for (let index = 0; index < rostov_admiral.length; index++) {
-      rostov_admiral[index].style.display = "none";
-    }
-    for (let index = 0; index < sochi.length; index++) {
-      sochi[index].style.display = "block";
-    }
-    for (let index = 0; index < rostov_patriotic.length; index++) {
-      rostov_patriotic[index].style.display = "none";
-    }
+  if (options.dots) {
+    initDots();
   } else {
-    link_1.classList.remove("active");
-    link_2.classList.remove("active");
-    link_3.classList.add("active");
-    dot_1.classList.remove("active");
-    dot_2.classList.remove("active");
-    dot_3.classList.add("active");
-    for (let index = 0; index < rostov_admiral.length; index++) {
-      rostov_admiral[index].style.display = "none";
-    }
-    for (let index = 0; index < sochi.length; index++) {
-      sochi[index].style.display = "none";
-    }
-    for (let index = 0; index < rostov_patriotic.length; index++) {
-      rostov_patriotic[index].style.display = "block";
+    dotsWrapper.style.display = "none"
+  }
+
+  if (options.autoplay) {
+    initAutoplay();
+  }
+
+  if (options.arrows) {
+    initArrows();
+  } else {
+    oneSliderArrow.forEach((arrow) => {
+      arrow.style.display = "none";
+    });
+  }
+
+  function moveSlider(num) {
+    sliderImages.querySelector(".active").classList.remove("active");
+    sliderImages.querySelector(`.n${num}`).classList.add("active");
+    linkWrapper.querySelector(".active").classList.remove("active");
+    linkWrapper.querySelector(`.n${num}`).classList.add("active");
+    cityWrapper.querySelector(".active").classList.remove("active");
+    cityWrapper.querySelector(`.n${num}`).classList.add("active");
+    areaWrapper.querySelector(".active").classList.remove("active");
+    areaWrapper.querySelector(`.n${num}`).classList.add("active");
+    timeWrapper.querySelector(".active").classList.remove("active");
+    timeWrapper.querySelector(`.n${num}`).classList.add("active");
+
+    if (options.dots) {
+      dotsWrapper.querySelector(".active").classList.remove("active");
+      dotsWrapper.querySelector(`.n${num}`).classList.add("active");
     }
   }
-};
 
-console.log(window.screen.width);
-console.log(document.documentElement.clientWidth);
-console.log(window.screen.height);
-console.log(
-document.documentElement.clientHeight);
+  function initImages() {
+    images.forEach((image, index) => {
+      let imageElement = document.createElement("div");
+      imageElement.classList = `image n${index} ${index ? "" : "active"}`;
+      imageElement.dataset.index = index;
+      imageElement.style.backgroundImage = `url(${image.url})`;
+      sliderImages.appendChild(imageElement);
+      console.log(`url(${image.url})`);
+    });
+  }
 
-console.log(1);
+  function initLinks() {
+    images.forEach((image, index) => {
+      let linkElement = document.createElement("li");
+      linkElement.classList = `main__images_link n${index} ${
+        index ? "" : "active"
+      }`;
+      linkElement.dataset.index = index;
+      linkElement.innerHTML = image.name;
+      linkElement.addEventListener("click", () =>
+        moveSlider(this.dataset.index)
+      );
+      linkWrapper.appendChild(linkElement);
+    });
+  }
 
-const a = new Promise((resolve, reject) => resolve(console.log(2)));
+  function initArrows() {
+    let lastIndex = images.length - 1;
+    oneSliderArrow.forEach((arrow) => {
+      arrow.addEventListener("click", () => {
+        let curNum = +sliderImages.querySelector(".active").dataset.index;
+        let nextNum;
+        if (arrow.classList.contains("left")) {
+          nextNum = curNum === 0 ? lastIndex : curNum - 1;
+        } else {
+          nextNum = curNum === lastIndex ? 0 : curNum + 1;
+        }
+        moveSlider(nextNum);
+      });
+    });
+  }
 
-a.then((res) => console.log(3));
+  function initDots() {
+    images.forEach((image, index) => {
+      let dot = document.createElement("div");
+      dot.className = `slider__points_item n${index} ${index ? "" : "active"}`;
+      dot.dataset.index = index;
+      dot.addEventListener("click", function () {
+        moveSlider(this.dataset.index);
+      });
+      dotsWrapper.appendChild(dot);
+    })  }
 
-setTimeout(() => {
-  console.log(4);
-}, 0);
+  function initAutoplay() {
+    setInterval(() => {
+      let curNum = +sliderImages.querySelector(".active").dataset.index;
+      let nextNum = curNum === images.length - 1 ? 0 : curNum + 1;
+      moveSlider(nextNum);
+    }, options.autoplayInterval);
+  }
 
-console.log(5);
+  function changeTextSpecifications() {
+    images.forEach((image, index) => {
+      let cityElement = document.createElement("p");
+      cityElement.classList = `city-item n${index} ${index ? "" : "active"}`;
+      cityElement.dataset.index = index;
+      cityElement.innerHTML = image.city;
+      cityWrapper.appendChild(cityElement);
+      let areaElement = document.createElement("p");
+      areaElement.classList = `area-item n${index} ${index ? "" : "active"}`;
+      areaElement.dataset.index = index;
+      areaElement.innerHTML = image.area;
+      areaWrapper.appendChild(areaElement);
+      let timeElement = document.createElement("p");
+      timeElement.classList = `time-item n${index} ${index ? "" : "active"}`;
+      timeElement.dataset.index = index;
+      timeElement.innerHTML = image.time;
+      timeWrapper.appendChild(timeElement);
+    });
+  }
+
+  changeTextSpecifications();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  let sliderOptions = {
+    dots: true,
+    autoplay: true,
+    autoplayInterval: 5000,
+    arrows: true,
+  };
+
+  initSlider(images, sliderOptions);
+});
