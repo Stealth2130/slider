@@ -7,20 +7,24 @@ const images = [
     city: ["Rostov-on-Don", " LCD admiral"],
     area: "81 m<sup>2</sup>",
     time: "3.5 months",
-  },
-  {
+  },{
     url: "./images/Sochi.jpg",
     name: "SOCHI THIEVES",
     city: ["Sochi", " Thieves"],
     area: "105 m<sup>2",
     time: "3 months",
-  },
-  {
+  },{
     url: "./images/Rostov-on-don_patriotic.jpg",
     name: "ROSTOV-ON-DON PATRIOTIC",
     city: ["Rostov-on-Don", " Patriotic"],
     area: "93 m<sup>2</sup>",
     time: "4 months",
+  },{
+    url: "./images/Paris.jpg",
+    name: "PARIS",
+    city: "Paris",
+    area: "123 m<sup>2</sup>",
+    time: "6 months",
   },
 ];
 
@@ -36,10 +40,8 @@ function initSlider(images, options) {
 
   const sliderWrapper = document.querySelector(".main__images_slider");
   const sliderImages = sliderWrapper.querySelector(".slider__image");
-  const sliderNavigation = document.querySelector(".slider__navigation");
-  const oneSliderArrow = sliderNavigation.querySelectorAll(".slider__arrow");
-  const textWrapper = document.querySelector(".main__text");
-  const dotsWrapper = textWrapper.querySelector(".slider__points")
+  const oneNavigationArrow = document.querySelectorAll(".navigation__arrow");
+  const dotsWrapper = document.querySelector(".navigation__points");
   const linkWrapper = document.querySelector(".main__images_links");
   const cityWrapper = document.querySelector(".city");
   const areaWrapper = document.querySelector(".area");
@@ -61,7 +63,7 @@ function initSlider(images, options) {
   if (options.arrows) {
     initArrows();
   } else {
-    oneSliderArrow.forEach((arrow) => {
+    oneNavigationArrow.forEach((arrow) => {
       arrow.style.display = "none";
     });
   }
@@ -103,8 +105,8 @@ function initSlider(images, options) {
       }`;
       linkElement.dataset.index = index;
       linkElement.innerHTML = image.name;
-      linkElement.addEventListener("click", () =>
-        moveSlider(this.dataset.index)
+      linkElement.addEventListener("click", function ()
+        {moveSlider(this.dataset.index)}
       );
       linkWrapper.appendChild(linkElement);
     });
@@ -112,7 +114,7 @@ function initSlider(images, options) {
 
   function initArrows() {
     let lastIndex = images.length - 1;
-    oneSliderArrow.forEach((arrow) => {
+    oneNavigationArrow.forEach((arrow) => {
       arrow.addEventListener("click", () => {
         let curNum = +sliderImages.querySelector(".active").dataset.index;
         let nextNum;
@@ -129,7 +131,7 @@ function initSlider(images, options) {
   function initDots() {
     images.forEach((image, index) => {
       let dot = document.createElement("div");
-      dot.className = `slider__points_item n${index} ${index ? "" : "active"}`;
+      dot.className = `navigation__points_item n${index} ${index ? "" : "active"}`;
       dot.dataset.index = index;
       dot.addEventListener("click", function () {
         moveSlider(this.dataset.index);
